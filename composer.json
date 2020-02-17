@@ -1,0 +1,53 @@
+{
+  "name": "elbgoods/laravel-trashmail-rule",
+  "description": "Laravel validation rule to prevent trashmail email addresses.",
+  "keywords": [
+    "laravel",
+    "validation",
+    "trashmail",
+    "email"
+  ],
+  "homepage": "https://github.com/elbgoods/laravel-trashmail-rule",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tom Witkowski",
+      "email": "dev.gummibeer@gmail.com",
+      "homepage": "https://gummibeer.de",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "astrotomic/laravel-guzzle": "^1.0",
+    "illuminate/cache": "^6.0",
+    "illuminate/support": "^6.0"
+  },
+  "require-dev": {
+    "codedungeon/phpunit-result-printer": "^0.26.2",
+    "elbgoods/ci-test-tools": "^1.5.1",
+    "nunomaduro/collision": "^3.0",
+    "orchestra/testbench": "^4.0",
+    "phpunit/phpunit": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Elbgoods\\TrashmailRule\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Elbgoods\\TrashmailRule\\Tests\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Elbgoods\\TrashmailRule\\TrashmailRuleServiceProvider"
+      ]
+    }
+  }
+}

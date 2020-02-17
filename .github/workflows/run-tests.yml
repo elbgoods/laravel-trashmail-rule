@@ -1,0 +1,59 @@
+name: run-tests
+
+on: push
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [7.4]
+        laravel: [6.*]
+        dependency-version: [prefer-lowest, prefer-stable]
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache Composer
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: |
+            composer-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-
+            composer-laravel-${{ matrix.laravel }}-php-
+            composer-laravel-
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+
+      - name: phpunit
+        run: vendor/bin/phpunit
+
+      - name: php-cs-test
+        run: vendor/bin/php-cs-test
+
+      - name: php-md-test
+        run: vendor/bin/php-md-test ./src
+
+      - name: php-tlint-test
+        run: vendor/bin/php-tlint-test ./src
+
+      - name: php-insights-test
+        run: vendor/bin/php-insights-test
+
+      - name: php-stan-test
+        run: vendor/bin/php-stan-test
+
+      - name: php-mn-test
+        run: vendor/bin/php-mn-test ./src
