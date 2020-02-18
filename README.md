@@ -41,6 +41,13 @@ You can add your own blacklist, these domains will always be blocked - independe
 
 If you want to pass some domains always you can add them to the whitelist. These domains will always pass, even if they are listed in the blacklist.
 
+# supported Providers
+
+* local configuration - `\Elbgoods\TrashmailRule\Providers\ConfigProvider`
+* https://dead-letter.email - `\Elbgoods\TrashmailRule\Providers\DeadLetterProvider`
+* https://disposable-email-detector.com - `\Elbgoods\TrashmailRule\Providers\DisposableEmailDetectorProvider`
+* https://verifier.meetchopra.com - `\Elbgoods\TrashmailRule\Providers\VerifierProvider`
+
 ## Usage
 
 ## Validation Rule
