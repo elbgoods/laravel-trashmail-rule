@@ -9,6 +9,7 @@ return [
      */
     'providers' => [
         'config',
+        'disposable_email_detector',
         'dead_letter',
     ],
 
@@ -25,6 +26,16 @@ return [
         ],
         'guzzle' => [
             RequestOptions::TIMEOUT => 10,
+        ],
+    ],
+
+    /*
+     * This package can do a request to https://www.disposable-email-detector.com
+     */
+    'disposable_email_detector' => [
+        'enabled' => true,
+        'guzzle' => [
+            RequestOptions::TIMEOUT => 5,
         ],
     ],
 
