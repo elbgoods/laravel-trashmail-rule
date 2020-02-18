@@ -43,6 +43,8 @@ If you want to pass some domains always you can add them to the whitelist. These
 
 ## Usage
 
+## Validation Rule
+
 This package provides a basic `TrashmailRule` which you can use. All more specific rules only extend this rule with a predefined `format`.
 
 ```php
@@ -59,6 +61,47 @@ use Elbgoods\TrashmailRule\Rules\TrashmailRule;
 $rule = new TrashmailRule(false);
 $rule->nullable();
 ```
+
+## Facade
+
+You can also use the facade if you want to check any email address outside validation.
+This will run the same logic as the validation rule and runs all providers set in the config.
+
+```php
+use Elbgoods\TrashmailRule\Facades\Trashmail;
+
+Trashmail::isDisposable('example@elbgoods.de');
+```
+
+## single Provider
+
+You can also check using a single provider only. 
+Keep in mind that all providers only accept the domain to check and not a full email address.
+The facade provides a method that returns the domain used in an email address.
+
+```php
+use Elbgoods\TrashmailRule\Facades\Trashmail;
+
+Trashmail::provider('config')->isDisposable(
+    Trashmail::getDomain('example@elbgoods.de')
+);
+```
+
+## custom Provider
+
+If you want to add your own provider you can do so.
+
+```php
+use Elbgoods\TrashmailRule\Facades\Trashmail;
+use Illuminate\Contracts\Container\Container;
+use Elbgoods\TrashmailRule\Contracts\ProviderContract;
+
+Trashmail::extend('custom_provider', static function (Container $app): ProviderContract {
+    return new CustomProvider();
+});
+```
+
+
 
 ## Changelog
 

@@ -2,6 +2,8 @@
 
 namespace Elbgoods\TrashmailRule;
 
+use Closure;
+use Elbgoods\TrashmailRule\Contracts\ProviderContract;
 use Exception;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Support\Str;
@@ -48,7 +50,17 @@ class Trashmail
         return false;
     }
 
-    protected function getDomain(string $email): string
+    public function provider(string $provider): ProviderContract
+    {
+        return $this->manager->driver($provider);
+    }
+
+    public function extend(string $provider, Closure $creator): TrashmailManager
+    {
+        return $this->manager->extend($provider, $creator);
+    }
+
+    public function getDomain(string $email): string
     {
         return trim(mb_strtolower(Str::after($email, '@')));
     }
