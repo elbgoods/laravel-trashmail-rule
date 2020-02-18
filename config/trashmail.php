@@ -3,6 +3,11 @@
 use GuzzleHttp\RequestOptions;
 
 return [
+    'providers' => [
+        'config',
+        'dead_letter',
+    ],
+
     /*
      * This package can load a remote blacklist from https://www.dead-letter.email
      */

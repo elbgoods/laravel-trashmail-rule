@@ -2,6 +2,7 @@
 
 namespace Elbgoods\TrashmailRule;
 
+use Elbgoods\TrashmailRule\Providers\ConfigProvider;
 use Illuminate\Support\ServiceProvider;
 
 class TrashmailRuleServiceProvider extends ServiceProvider
@@ -19,5 +20,12 @@ class TrashmailRuleServiceProvider extends ServiceProvider
         ], 'lang');
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang/', 'trashmailRule');
+    }
+
+    public function register()
+    {
+        $this->app->singleton(TrashmailManager::class);
+
+        $this->app->singleton(Trashmail::class);
     }
 }
