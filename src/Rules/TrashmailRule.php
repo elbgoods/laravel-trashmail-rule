@@ -2,15 +2,13 @@
 
 namespace Elbgoods\TrashmailRule\Rules;
 
-use Illuminate\Cache\Repository as CacheRepository;
+use Elbgoods\TrashmailRule\Facades\Trashmail;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
 class TrashmailRule implements Rule
 {
-    protected const BLACKLIST_URL = 'https://www.dead-letter.email/blacklist_flat.json';
-
     protected bool $required;
 
     public function __construct(bool $required = true)
@@ -45,16 +43,7 @@ class TrashmailRule implements Rule
             return false;
         }
 
-        $domain = trim(mb_strtolower(Str::after($value, '@')));
-
-        if (in_array($domain, config('trashmail.whitelist'))) {
-            return true;
-        }
-
-        return ! in_array(
-            $this->hashDomain($domain),
-            $this->getBlacklist()
-        );
+        return ! Trashmail::isDisposable($value);
     }
 
     public function message(): string
@@ -70,61 +59,5 @@ class TrashmailRule implements Rule
     public function isNullable(): bool
     {
         return ! $this->required;
-    }
-
-    protected function getBlacklist(): array
-    {
-        $deadLetter = $this->getDeadLetter();
-
-        $blacklist = array_map([$this, 'hashDomain'], config('trashmail.blacklist'));
-
-        return array_merge($deadLetter, $blacklist);
-    }
-
-    protected function getDeadLetter(): array
-    {
-        if (! config('trashmail.dead_letter.enabled')) {
-            return [];
-        }
-
-        if (! config('trashmail.dead_letter.cache.enabled')) {
-            return $this->loadDeadLetter();
-        }
-
-        /** @var CacheRepository $cache */
-        $cache = app('cache')->store(config('trashmail.dead_letter.cache.store'));
-
-        $key = config('trashmail.dead_letter.cache.key');
-
-        if ($cache->has($key)) {
-            return json_decode($cache->get($key), true);
-        }
-
-        $blacklist = $this->loadDeadLetter();
-
-        $cache->put(
-            $key,
-            json_encode($blacklist),
-            config('trashmail.dead_letter.cache.ttl')
-        );
-
-        return $blacklist;
-    }
-
-    protected function loadDeadLetter(): array
-    {
-        $response = guzzle(
-            self::BLACKLIST_URL,
-            config('trashmail.dead_letter.guzzle')
-        )->request('GET', '');
-
-        $body = $response->getBody()->getContents();
-
-        return json_decode($body, true);
-    }
-
-    protected function hashDomain(string $domain): string
-    {
-        return hash('sha1', hash('sha1', $domain));
     }
 }
