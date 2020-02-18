@@ -3,8 +3,6 @@
 namespace Elbgoods\TrashmailRule\Providers;
 
 use Elbgoods\TrashmailRule\Contracts\ProviderContract;
-use Illuminate\Contracts\Cache\Factory as CacheFactory;
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
 class DisposableEmailDetectorProvider implements ProviderContract
 {
