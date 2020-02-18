@@ -20,8 +20,7 @@ class Trashmail
         ConfigRepository $config,
         TrashmailManager $manager,
         LoggerInterface $log
-    )
-    {
+    ) {
         $this->config = $config;
         $this->manager = $manager;
         $this->log = $log;
@@ -36,7 +35,7 @@ class Trashmail
         foreach ($providers as $provider) {
             try {
                 $isDisposable = $this->manager->driver($provider)->isDisposable($domain);
-            } catch(Exception $exception) {
+            } catch (Exception $exception) {
                 $this->log->error($exception);
 
                 continue;

@@ -43,7 +43,7 @@ class TrashmailRule implements Rule
             return false;
         }
 
-        return !Trashmail::isDisposable($value);
+        return ! Trashmail::isDisposable($value);
     }
 
     public function message(): string

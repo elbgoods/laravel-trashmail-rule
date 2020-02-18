@@ -23,14 +23,14 @@ class TrashmailManager extends Manager
     {
         return $this->container->make(ConfigProvider::class, [
             'whitelist' => $this->config->get('trashmail.whitelist'),
-            'blacklist' => $this->config->get('trashmail.blacklist')
+            'blacklist' => $this->config->get('trashmail.blacklist'),
         ]);
     }
 
     protected function createDeadLetterDriver(): DeadLetterProvider
     {
         return $this->container->make(DeadLetterProvider::class, [
-            'config' => $this->config->get('trashmail.dead_letter')
+            'config' => $this->config->get('trashmail.dead_letter'),
         ]);
     }
 }

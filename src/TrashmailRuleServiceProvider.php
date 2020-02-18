@@ -2,7 +2,6 @@
 
 namespace Elbgoods\TrashmailRule;
 
-use Elbgoods\TrashmailRule\Providers\ConfigProvider;
 use Illuminate\Support\ServiceProvider;
 
 class TrashmailRuleServiceProvider extends ServiceProvider
