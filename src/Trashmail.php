@@ -11,10 +11,7 @@ class Trashmail
 {
     protected ConfigRepository $config;
     protected TrashmailManager $manager;
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $log;
+    protected LoggerInterface $log;
 
     public function __construct(
         ConfigRepository $config,

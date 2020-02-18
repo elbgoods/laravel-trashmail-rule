@@ -6,6 +6,7 @@ use Elbgoods\TrashmailRule\Contracts\ProviderContract;
 use Elbgoods\TrashmailRule\Providers\ConfigProvider;
 use Elbgoods\TrashmailRule\Providers\DeadLetterProvider;
 use Illuminate\Support\Manager;
+use RuntimeException;
 
 class TrashmailManager extends Manager
 {
@@ -14,9 +15,23 @@ class TrashmailManager extends Manager
         return 'config';
     }
 
+    /**
+     * @param string|null $driver
+     *
+     * @return ProviderContract
+     */
     public function driver($driver = null): ProviderContract
     {
-        return parent::driver($driver);
+        $driver = parent::driver($driver);
+
+        if (! is_a($driver, ProviderContract::class)) {
+            throw new RuntimeException(sprintf(
+                'All drivers should implement [%s].',
+                ProviderContract::class
+            ));
+        }
+
+        return $driver;
     }
 
     protected function createConfigDriver(): ConfigProvider

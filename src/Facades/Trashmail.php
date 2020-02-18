@@ -2,6 +2,7 @@
 
 namespace Elbgoods\TrashmailRule\Facades;
 
+use Elbgoods\TrashmailRule\Trashmail as TrashmailService;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -11,6 +12,6 @@ class Trashmail extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Elbgoods\TrashmailRule\Trashmail::class;
+        return TrashmailService::class;
     }
 }
