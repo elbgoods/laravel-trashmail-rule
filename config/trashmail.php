@@ -3,8 +3,13 @@
 use GuzzleHttp\RequestOptions;
 
 return [
+    /*
+     * The list of providers that should run to decide whether an email is disposable or not.
+     * The order of providers is respected - so you should put the fastest or most important ones at the top.
+     */
     'providers' => [
         'config',
+        'disposable_email_detector',
         'dead_letter',
     ],
 
@@ -21,6 +26,16 @@ return [
         ],
         'guzzle' => [
             RequestOptions::TIMEOUT => 10,
+        ],
+    ],
+
+    /*
+     * This package can do a request to https://www.disposable-email-detector.com
+     */
+    'disposable_email_detector' => [
+        'enabled' => true,
+        'guzzle' => [
+            RequestOptions::TIMEOUT => 5,
         ],
     ],
 
