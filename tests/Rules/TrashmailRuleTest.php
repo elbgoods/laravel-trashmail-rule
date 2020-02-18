@@ -11,6 +11,9 @@ final class TrashmailRuleTest extends TestCase
     /** @test */
     public function it_validates_the_email_domain(): void
     {
+        $this->app['config']->set('trashmail.disposable_email_detector.enabled', true);
+        $this->app['config']->set('trashmail.dead_letter.enabled', true);
+
         $rule = new TrashmailRule();
 
         $this->assertFalse($rule->passes('email', 'example@fakeinbox.com'));
@@ -23,6 +26,8 @@ final class TrashmailRuleTest extends TestCase
      */
     public function it_fails_known_trashmail_providers(string $domain): void
     {
+        $this->app['config']->set('trashmail.disposable_email_detector.enabled', true);
+        $this->app['config']->set('trashmail.dead_letter.enabled', true);
         $this->app['config']->set('trashmail.blacklist', $this->trashMailDomains());
 
         $rule = new TrashmailRule();

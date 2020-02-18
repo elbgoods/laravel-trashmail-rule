@@ -10,6 +10,7 @@ return [
     'providers' => [
         'config',
         'disposable_email_detector',
+        'verifier',
         'dead_letter',
     ],
 
@@ -17,7 +18,7 @@ return [
      * This package can load a remote blacklist from https://www.dead-letter.email
      */
     'dead_letter' => [
-        'enabled' => true,
+        'enabled' => false,
         'cache' => [
             'enabled' => true,
             'store' => null,
@@ -33,7 +34,18 @@ return [
      * This package can do a request to https://www.disposable-email-detector.com
      */
     'disposable_email_detector' => [
-        'enabled' => true,
+        'enabled' => false,
+        'guzzle' => [
+            RequestOptions::TIMEOUT => 5,
+        ],
+    ],
+
+    /*
+     * This package can do a request to https://verifier.meetchopra.com
+     */
+    'verifier' => [
+        'enabled' => false,
+        'api_key' => null,
         'guzzle' => [
             RequestOptions::TIMEOUT => 5,
         ],

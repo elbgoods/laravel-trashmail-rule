@@ -6,6 +6,7 @@ use Elbgoods\TrashmailRule\Contracts\ProviderContract;
 use Elbgoods\TrashmailRule\Providers\ConfigProvider;
 use Elbgoods\TrashmailRule\Providers\DeadLetterProvider;
 use Elbgoods\TrashmailRule\Providers\DisposableEmailDetectorProvider;
+use Elbgoods\TrashmailRule\Providers\VerifierProvider;
 use Illuminate\Support\Manager;
 use RuntimeException;
 
@@ -54,6 +55,13 @@ class TrashmailManager extends Manager
     {
         return $this->container->make(DisposableEmailDetectorProvider::class, [
             'config' => $this->config->get('trashmail.disposable_email_detector'),
+        ]);
+    }
+
+    protected function createVerifierDriver(): VerifierProvider
+    {
+        return $this->container->make(VerifierProvider::class, [
+            'config' => $this->config->get('trashmail.verifier'),
         ]);
     }
 }
