@@ -2,6 +2,10 @@
 
 All notable changes to this package will be documented in this file.
 
+## v0.4.0
+
+* add https://verifier.meetchopra.com provider `\Elbgoods\TrashmailRule\Providers\VerifierProvider`
+
 ## v0.3.0
 
 * add https://disposable-email-detector.com provider `\Elbgoods\TrashmailRule\Providers\DisposableEmailDetectorProvider`
