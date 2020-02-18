@@ -101,8 +101,6 @@ Trashmail::extend('custom_provider', static function (Container $app): ProviderC
 });
 ```
 
-
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
