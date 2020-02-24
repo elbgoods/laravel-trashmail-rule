@@ -70,6 +70,12 @@ final class TrashmailRuleTest extends TestCase
     /** @test */
     public function verifier_fails_with_disposable_email(): void
     {
+        if ($this->app['config']->get('trashmail.verifier.api_key') === null) {
+            $this->markTestSkipped('Verifier requires an API-Key');
+
+            return;
+        }
+
         $this->app['config']->set('trashmail.verifier.enabled', true);
 
         $rule = new TrashmailRule();
