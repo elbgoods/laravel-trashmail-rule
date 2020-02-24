@@ -4,7 +4,7 @@ All notable changes to this package will be documented in this file.
 
 ## v0.5.0
 
-
+* upgrade `astrotomic/laravel-guzzle` to v2.0.0
 
 ## v0.4.0
 
