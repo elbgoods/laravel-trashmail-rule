@@ -5,7 +5,6 @@ namespace Elbgoods\TrashmailRule\Tests\Rules;
 use Elbgoods\TrashmailRule\Rules\TrashmailRule;
 use Elbgoods\TrashmailRule\Tests\TestCase;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 final class TrashmailRuleTest extends TestCase
 {
