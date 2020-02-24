@@ -1,7 +1,5 @@
 <?php
 
-use GuzzleHttp\RequestOptions;
-
 return [
     /*
      * The list of providers that should run to decide whether an email is disposable or not.
@@ -25,9 +23,6 @@ return [
             'key' => 'elbgoods.trashmail.dead_letter',
             'ttl' => 60 * 60 * 24, // one day
         ],
-        'guzzle' => [
-            RequestOptions::TIMEOUT => 10,
-        ],
     ],
 
     /*
@@ -35,9 +30,6 @@ return [
      */
     'disposable_email_detector' => [
         'enabled' => false,
-        'guzzle' => [
-            RequestOptions::TIMEOUT => 5,
-        ],
     ],
 
     /*
@@ -45,10 +37,7 @@ return [
      */
     'verifier' => [
         'enabled' => false,
-        'api_key' => null,
-        'guzzle' => [
-            RequestOptions::TIMEOUT => 5,
-        ],
+        'api_key' => env('VERIFIER_API_KEY'),
     ],
 
     /*

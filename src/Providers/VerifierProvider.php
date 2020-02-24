@@ -2,12 +2,11 @@
 
 namespace Elbgoods\TrashmailRule\Providers;
 
+use Astrotomic\LaravelGuzzle\Facades\Guzzle;
 use Elbgoods\TrashmailRule\Contracts\ProviderContract;
 
 class VerifierProvider implements ProviderContract
 {
-    protected const BASE_URL = 'https://verifier.meetchopra.com/verify/';
-
     protected array $config;
 
     public function __construct(array $config)
@@ -25,14 +24,12 @@ class VerifierProvider implements ProviderContract
             return null;
         }
 
-        $response = guzzle(
-            self::BASE_URL,
-            $this->config['guzzle']
-        )->request('GET', $domain, [
-            'query' => [
-                'token' => $this->config['api_key'],
-            ],
-        ]);
+        $response = Guzzle::client('verifier.meetchopra.com')
+            ->request('GET', 'verify/'.urlencode($domain), [
+                'query' => [
+                    'token' => $this->config['api_key'],
+                ],
+            ]);
 
         $body = $response->getBody()->getContents();
 

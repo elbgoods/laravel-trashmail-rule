@@ -5,6 +5,7 @@ namespace Elbgoods\TrashmailRule\Tests\Rules;
 use Elbgoods\TrashmailRule\Rules\TrashmailRule;
 use Elbgoods\TrashmailRule\Tests\TestCase;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 final class TrashmailRuleTest extends TestCase
 {
@@ -45,6 +46,36 @@ final class TrashmailRuleTest extends TestCase
         $rule = new TrashmailRule();
 
         $this->assertTrue($rule->passes('email', 'example@'.$domain));
+    }
+
+    /** @test */
+    public function dead_letter_fails_with_disposable_email(): void
+    {
+        $this->app['config']->set('trashmail.dead_letter.enabled', true);
+
+        $rule = new TrashmailRule();
+
+        $this->assertFalse($rule->passes('email', 'example@0815.ru'));
+    }
+
+    /** @test */
+    public function disposable_email_fails_with_disposable_email(): void
+    {
+        $this->app['config']->set('trashmail.disposable_email_detector.enabled', true);
+
+        $rule = new TrashmailRule();
+
+        $this->assertFalse($rule->passes('email', 'example@0815.ru'));
+    }
+
+    /** @test */
+    public function verifier_fails_with_disposable_email(): void
+    {
+        $this->app['config']->set('trashmail.verifier.enabled', true);
+
+        $rule = new TrashmailRule();
+
+        $this->assertFalse($rule->passes('email', 'example@0815.ru'));
     }
 
     public function provideTrashMailDomain(): array

@@ -39,6 +39,8 @@ jobs:
 
       - name: phpunit
         run: vendor/bin/phpunit
+        env:
+          VERIFIER_API_KEY: ${{ secrets.VERIFIER_API_KEY }}
 
       - name: php-cs-test
         run: vendor/bin/php-cs-test
