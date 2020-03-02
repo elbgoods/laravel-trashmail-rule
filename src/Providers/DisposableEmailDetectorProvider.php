@@ -2,12 +2,11 @@
 
 namespace Elbgoods\TrashmailRule\Providers;
 
+use Astrotomic\LaravelGuzzle\Facades\Guzzle;
 use Elbgoods\TrashmailRule\Contracts\ProviderContract;
 
 class DisposableEmailDetectorProvider implements ProviderContract
 {
-    protected const BASE_URL = 'https://api.disposable-email-detector.com/api/dea/v1/check/';
-
     protected array $config;
 
     public function __construct(array $config)
@@ -21,10 +20,8 @@ class DisposableEmailDetectorProvider implements ProviderContract
             return null;
         }
 
-        $response = guzzle(
-            self::BASE_URL,
-            $this->config['guzzle']
-        )->request('GET', $domain);
+        $response = Guzzle::client('api.disposable-email-detector.com')
+            ->request('GET', 'api/dea/v1/check/'.urlencode($domain));
 
         $body = $response->getBody()->getContents();
 

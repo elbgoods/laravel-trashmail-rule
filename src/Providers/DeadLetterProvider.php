@@ -2,14 +2,13 @@
 
 namespace Elbgoods\TrashmailRule\Providers;
 
+use Astrotomic\LaravelGuzzle\Facades\Guzzle;
 use Elbgoods\TrashmailRule\Contracts\ProviderContract;
 use Illuminate\Contracts\Cache\Factory as CacheFactory;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
 class DeadLetterProvider implements ProviderContract
 {
-    protected const BLACKLIST_URL = 'https://www.dead-letter.email/blacklist_flat.json';
-
     protected array $config;
     protected CacheFactory $cache;
 
@@ -59,10 +58,8 @@ class DeadLetterProvider implements ProviderContract
 
     protected function loadDeadLetter(): array
     {
-        $response = guzzle(
-            self::BLACKLIST_URL,
-            $this->config['guzzle']
-        )->request('GET', '');
+        $response = Guzzle::client('dead-letter.email')
+            ->request('GET', 'blacklist_flat.json');
 
         $body = $response->getBody()->getContents();
 

@@ -2,6 +2,8 @@
 
 namespace Elbgoods\TrashmailRule;
 
+use Astrotomic\LaravelGuzzle\Facades\Guzzle;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Support\ServiceProvider;
 
 class TrashmailRuleServiceProvider extends ServiceProvider
@@ -12,6 +14,27 @@ class TrashmailRuleServiceProvider extends ServiceProvider
             $this->bootConfig();
             $this->bootLang();
         }
+
+        Guzzle::register('dead-letter.email', [
+            'base_uri' => 'https://www.dead-letter.email',
+            RequestOptions::TIMEOUT => 10,
+            RequestOptions::ALLOW_REDIRECTS => true,
+            RequestOptions::HTTP_ERRORS => true,
+        ]);
+
+        Guzzle::register('api.disposable-email-detector.com', [
+            'base_uri' => 'https://api.disposable-email-detector.com',
+            RequestOptions::TIMEOUT => 5,
+            RequestOptions::ALLOW_REDIRECTS => true,
+            RequestOptions::HTTP_ERRORS => true,
+        ]);
+
+        Guzzle::register('verifier.meetchopra.com', [
+            'base_uri' => 'https://verifier.meetchopra.com',
+            RequestOptions::TIMEOUT => 5,
+            RequestOptions::ALLOW_REDIRECTS => true,
+            RequestOptions::HTTP_ERRORS => true,
+        ]);
     }
 
     public function register(): void
