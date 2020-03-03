@@ -20,15 +20,15 @@
   "require": {
     "php": "^7.4",
     "astrotomic/laravel-guzzle": "^2.0",
-    "illuminate/cache": "^6.0",
-    "illuminate/support": "^6.0"
+    "illuminate/cache": "^6.0 || ^7.0",
+    "illuminate/support": "^6.0 || ^7.0"
   },
   "require-dev": {
     "codedungeon/phpunit-result-printer": "^0.26.2",
-    "elbgoods/ci-test-tools": "^1.5.1",
+    "elbgoods/ci-test-tools": "^1.7.0",
     "nunomaduro/collision": "^3.0",
-    "orchestra/testbench": "^4.0",
-    "phpunit/phpunit": "^8.0"
+    "orchestra/testbench": "^4.0 || ^5.0",
+    "phpunit/phpunit": "^8.0 || ^9.0"
   },
   "autoload": {
     "psr-4": {
@@ -43,6 +43,8 @@
   "config": {
     "sort-packages": true
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "extra": {
     "laravel": {
       "providers": [
