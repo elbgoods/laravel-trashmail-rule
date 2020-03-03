@@ -23,7 +23,7 @@
         </whitelist>
     </filter>
     <listeners>
-        <listener class="NunoMaduro\Collision\Adapters\Phpunit\Listener" />
+        <listener class="NunoMaduro\Collision\Adapters\Phpunit\Printer" />
     </listeners>
     <php>
         <env name="CACHE_DRIVER" value="file"/>
