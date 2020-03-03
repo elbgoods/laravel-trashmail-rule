@@ -10,7 +10,6 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         printerClass="Codedungeon\PHPUnitPrettyResultPrinter\Printer"
     >
     <testsuites>
         <testsuite name="TestSuite">
@@ -22,9 +21,6 @@
             <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
-    <listeners>
-        <listener class="NunoMaduro\Collision\Adapters\Phpunit\Listener" />
-    </listeners>
     <php>
         <env name="CACHE_DRIVER" value="file"/>
     </php>

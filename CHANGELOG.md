@@ -2,6 +2,10 @@
 
 All notable changes to this package will be documented in this file.
 
+## v0.6.0
+
+* add Laravel 7 support
+
 ## v0.5.0
 
 * upgrade `astrotomic/laravel-guzzle` to v2.0.0

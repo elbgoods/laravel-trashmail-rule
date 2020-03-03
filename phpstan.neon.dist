@@ -1,6 +1,6 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
-    - ./vendor/elbgoods/ci-test-tools/configs/phpstan.neon.dist
+    - ./vendor-bin/elbgoods/vendor/nunomaduro/larastan/extension.neon
+    - ./vendor-bin/elbgoods/vendor/elbgoods/ci-test-tools/configs/phpstan.neon.dist
 
 parameters:
     paths:
