@@ -2,6 +2,13 @@
 
 All notable changes to this package will be documented in this file.
 
+## 0.7.0
+
+replace insensitive language
+* config key `trashmail.whitelist` to `trashmail.allowed`
+* config key `trashmail.blacklist` to `trashmail.denied`
+* update default validation rule translation string
+
 ## v0.6.0
 
 * add Laravel 7 support
