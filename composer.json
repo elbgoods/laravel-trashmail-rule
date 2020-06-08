@@ -19,6 +19,7 @@
   ],
   "require": {
     "php": "^7.4",
+    "ext-json": "*",
     "astrotomic/laravel-guzzle": "^2.1",
     "illuminate/cache": "^6.0 || ^7.0",
     "illuminate/support": "^6.0 || ^7.0"
