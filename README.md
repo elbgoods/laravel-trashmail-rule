@@ -30,16 +30,16 @@ The package provides a configuration to define the rule behaviour.
 
 ### Dead-Letter.Email
 
-By default the package uses an up-to-date blacklist by [Dead-Letter.Email](https://www.dead-letter.email/). 
+By default the package uses an up-to-date list by [Dead-Letter.Email](https://www.dead-letter.email/). 
 You can disable this in the config and control the caching behaviour.
 
-### Blacklist
+### Denied domains
 
-You can add your own blacklist, these domains will always be blocked - independent if they are part of Dead-Letter.Email or not.
+You can add your own list of denied domains, these domains will always be blocked.
 
-### Whitelist
+### Allowed domains
 
-If you want to pass some domains always you can add them to the whitelist. These domains will always pass, even if they are listed in the blacklist.
+You can add your own list of allowed domains, these domains will always pass.
 
 # supported Providers
 

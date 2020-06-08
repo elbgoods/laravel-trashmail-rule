@@ -24,14 +24,14 @@ class DeadLetterProvider implements ProviderContract
             return null;
         }
 
-        if (in_array($this->hashDomain($domain), $this->getBlacklist())) {
+        if (in_array($this->hashDomain($domain), $this->getDenied())) {
             return true;
         }
 
         return null;
     }
 
-    protected function getBlacklist(): array
+    protected function getDenied(): array
     {
         if (! $this->config['cache']['enabled']) {
             return $this->loadDeadLetter();
@@ -45,15 +45,15 @@ class DeadLetterProvider implements ProviderContract
             return json_decode($cache->get($key), true);
         }
 
-        $blacklist = $this->loadDeadLetter();
+        $denied = $this->loadDeadLetter();
 
         $cache->put(
             $key,
-            json_encode($blacklist),
+            json_encode($denied),
             $this->config['cache']['ttl']
         );
 
-        return $blacklist;
+        return $denied;
     }
 
     protected function loadDeadLetter(): array

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'trash_mail' => ':attribute is a blacklisted email.',
+    'trash_mail' => ':attribute uses a denied email domain.',
 ];

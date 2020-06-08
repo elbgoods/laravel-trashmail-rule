@@ -28,7 +28,7 @@ final class TrashmailRuleTest extends TestCase
     {
         $this->app['config']->set('trashmail.disposable_email_detector.enabled', true);
         $this->app['config']->set('trashmail.dead_letter.enabled', true);
-        $this->app['config']->set('trashmail.blacklist', $this->trashMailDomains());
+        $this->app['config']->set('trashmail.denied', $this->trashMailDomains());
 
         $rule = new TrashmailRule();
 
@@ -36,11 +36,11 @@ final class TrashmailRuleTest extends TestCase
     }
 
     /** @test */
-    public function it_passes_whitelist_addresses(): void
+    public function it_passes_allowed_addresses(): void
     {
         $domain = Arr::random($this->trashMailDomains());
-        $this->app['config']->set('trashmail.blacklist', $this->trashMailDomains());
-        $this->app['config']->set('trashmail.whitelist', [$domain]);
+        $this->app['config']->set('trashmail.denied', $this->trashMailDomains());
+        $this->app['config']->set('trashmail.allowed', [$domain]);
 
         $rule = new TrashmailRule();
 

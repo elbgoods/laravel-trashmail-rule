@@ -39,8 +39,8 @@ class TrashmailManager extends Manager
     protected function createConfigDriver(): ConfigProvider
     {
         return $this->container->make(ConfigProvider::class, [
-            'whitelist' => $this->config->get('trashmail.whitelist'),
-            'blacklist' => $this->config->get('trashmail.blacklist'),
+            'allowed' => $this->config->get('trashmail.allowed'),
+            'denied' => $this->config->get('trashmail.denied'),
         ]);
     }
 

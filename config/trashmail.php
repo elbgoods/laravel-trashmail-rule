@@ -41,16 +41,16 @@ return [
     ],
 
     /*
-     * Here you can define your own blacklisted domains.
+     * Here you can define your own list of denied domains.
      */
-    'blacklist' => [
+    'denied' => [
 
     ],
 
     /*
      * Here you can list all domains you want to always allow.
      */
-    'whitelist' => [
+    'allowed' => [
 
     ],
 ];
