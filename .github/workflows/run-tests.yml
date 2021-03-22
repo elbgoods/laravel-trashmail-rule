@@ -4,11 +4,10 @@ on: push
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest]
         php: [8.0, 7.4]
         laravel: [8.*, 7.*]
         dependency-version: [prefer-lowest, prefer-stable]
