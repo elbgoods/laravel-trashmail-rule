@@ -2,6 +2,15 @@
 
 All notable changes to this package will be documented in this file.
 
+## 0.9.0
+
+- add PHP 8 support
+- drop Laravel 6 support
+
+## 0.8.0
+
+- add Laravel 8 support
+
 ## 0.7.0
 
 replace insensitive language
