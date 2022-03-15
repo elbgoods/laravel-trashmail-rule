@@ -35,6 +35,8 @@ class TrashmailRuleServiceProvider extends ServiceProvider
             RequestOptions::ALLOW_REDIRECTS => true,
             RequestOptions::HTTP_ERRORS => true,
         ]);
+        
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'trashmailRule');
     }
 
     public function register(): void
@@ -42,15 +44,15 @@ class TrashmailRuleServiceProvider extends ServiceProvider
         $this->app->singleton(TrashmailManager::class);
 
         $this->app->singleton(Trashmail::class);
+        
+        $this->mergeConfigFrom(__DIR__.'/../config/trashmail.php', 'trashmail');
     }
 
     protected function bootConfig(): void
     {
         $this->publishes([
             __DIR__.'/../config/trashmail.php' => config_path('trashmail.php'),
-        ], 'config');
-
-        $this->mergeConfigFrom(__DIR__.'/../config/trashmail.php', 'trashmail');
+        ], 'config');        
     }
 
     protected function bootLang(): void
@@ -59,6 +61,5 @@ class TrashmailRuleServiceProvider extends ServiceProvider
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/trashmailRule'),
         ], 'lang');
 
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang/', 'trashmailRule');
     }
 }
