@@ -15,13 +15,6 @@ class TrashmailRuleServiceProvider extends ServiceProvider
             $this->bootLang();
         }
 
-        Guzzle::register('dead-letter.email', [
-            'base_uri' => 'https://www.dead-letter.email',
-            RequestOptions::TIMEOUT => 10,
-            RequestOptions::ALLOW_REDIRECTS => true,
-            RequestOptions::HTTP_ERRORS => true,
-        ]);
-
         Guzzle::register('api.disposable-email-detector.com', [
             'base_uri' => 'https://api.disposable-email-detector.com',
             RequestOptions::TIMEOUT => 5,
@@ -35,7 +28,7 @@ class TrashmailRuleServiceProvider extends ServiceProvider
             RequestOptions::ALLOW_REDIRECTS => true,
             RequestOptions::HTTP_ERRORS => true,
         ]);
-        
+
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'trashmailRule');
     }
 
@@ -44,7 +37,7 @@ class TrashmailRuleServiceProvider extends ServiceProvider
         $this->app->singleton(TrashmailManager::class);
 
         $this->app->singleton(Trashmail::class);
-        
+
         $this->mergeConfigFrom(__DIR__.'/../config/trashmail.php', 'trashmail');
     }
 
@@ -52,7 +45,7 @@ class TrashmailRuleServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/trashmail.php' => config_path('trashmail.php'),
-        ], 'config');        
+        ], 'config');
     }
 
     protected function bootLang(): void

@@ -4,7 +4,6 @@ namespace Elbgoods\TrashmailRule;
 
 use Elbgoods\TrashmailRule\Contracts\ProviderContract;
 use Elbgoods\TrashmailRule\Providers\ConfigProvider;
-use Elbgoods\TrashmailRule\Providers\DeadLetterProvider;
 use Elbgoods\TrashmailRule\Providers\DisposableEmailDetectorProvider;
 use Elbgoods\TrashmailRule\Providers\VerifierProvider;
 use Illuminate\Support\Manager;
@@ -41,13 +40,6 @@ class TrashmailManager extends Manager
         return $this->container->make(ConfigProvider::class, [
             'allowed' => $this->config->get('trashmail.allowed'),
             'denied' => $this->config->get('trashmail.denied'),
-        ]);
-    }
-
-    protected function createDeadLetterDriver(): DeadLetterProvider
-    {
-        return $this->container->make(DeadLetterProvider::class, [
-            'config' => $this->config->get('trashmail.dead_letter'),
         ]);
     }
 
