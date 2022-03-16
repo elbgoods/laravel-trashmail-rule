@@ -48,16 +48,6 @@ final class TrashmailRuleTest extends TestCase
     }
 
     /** @test */
-    public function dead_letter_fails_with_disposable_email(): void
-    {
-        $this->app['config']->set('trashmail.dead_letter.enabled', true);
-
-        $rule = new TrashmailRule();
-
-        $this->assertFalse($rule->passes('email', 'example@0815.ru'));
-    }
-
-    /** @test */
     public function disposable_email_fails_with_disposable_email(): void
     {
         $this->app['config']->set('trashmail.disposable_email_detector.enabled', true);

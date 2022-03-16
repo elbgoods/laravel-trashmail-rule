@@ -28,11 +28,6 @@ php artisan vendor:publish --provider="Elbgoods\TrashmailRule\TrashmailRuleServi
 
 The package provides a configuration to define the rule behaviour.
 
-### Dead-Letter.Email
-
-By default the package uses an up-to-date list by [Dead-Letter.Email](https://www.dead-letter.email/). 
-You can disable this in the config and control the caching behaviour.
-
 ### Denied domains
 
 You can add your own list of denied domains, these domains will always be blocked.
@@ -44,7 +39,6 @@ You can add your own list of allowed domains, these domains will always pass.
 # supported Providers
 
 * local configuration - `\Elbgoods\TrashmailRule\Providers\ConfigProvider`
-* https://dead-letter.email - `\Elbgoods\TrashmailRule\Providers\DeadLetterProvider`
 * https://disposable-email-detector.com - `\Elbgoods\TrashmailRule\Providers\DisposableEmailDetectorProvider`
 * https://verifier.meetchopra.com - `\Elbgoods\TrashmailRule\Providers\VerifierProvider`
 

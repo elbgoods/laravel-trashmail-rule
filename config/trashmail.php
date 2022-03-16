@@ -9,20 +9,6 @@ return [
         'config',
         'disposable_email_detector',
         'verifier',
-        'dead_letter',
-    ],
-
-    /*
-     * This package can load a remote blacklist from https://www.dead-letter.email
-     */
-    'dead_letter' => [
-        'enabled' => false,
-        'cache' => [
-            'enabled' => true,
-            'store' => null,
-            'key' => 'elbgoods.trashmail.dead_letter',
-            'ttl' => 60 * 60 * 24, // one day
-        ],
     ],
 
     /*
