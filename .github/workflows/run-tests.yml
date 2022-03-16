@@ -43,21 +43,3 @@ jobs:
         run: vendor/bin/phpunit
         env:
           VERIFIER_API_KEY: ${{ secrets.VERIFIER_API_KEY }}
-
-      - name: php-cs-test
-        run: vendor/bin/php-cs-test
-
-      - name: php-md-test
-        run: vendor/bin/php-md-test ./src
-
-      - name: php-tlint-test
-        run: vendor/bin/php-tlint-test ./src
-
-      - name: php-insights-test
-        run: vendor/bin/php-insights-test
-
-      - name: php-stan-test
-        run: vendor/bin/php-stan-test
-
-      - name: php-mn-test
-        run: vendor/bin/php-mn-test ./src
